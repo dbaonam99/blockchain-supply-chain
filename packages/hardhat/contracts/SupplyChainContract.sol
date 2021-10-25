@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract SupplyChainContract {
   bytes32 public constant STATUS_CREATED = keccak256("STATUS_CREATED");
   bytes32 public constant STATUS_PRODUCING = keccak256("STATUS_PRODUCING");
+  bytes32 public constant STATUS_HARVESTED = keccak256("STATUS_HARVESTED");
   bytes32 public constant STATUS_VERIFIED = keccak256("STATUS_VERIFIED");
 
   using Counters for Counters.Counter;
@@ -67,11 +68,24 @@ contract SupplyChainContract {
 
   function acceptFarmer(uint256 orderId, bool isAccept) public {
     require(idToOrder[orderId].farmer != address(0), "Order do not have any farmer");
+    require(idToOrder[orderId].owner == msg.sender, "You can not accept this Order");
     idToOrder[orderId].isFarmerAccepted = isAccept;
     idToOrder[orderId].status = STATUS_PRODUCING;
   }
 
-  function farmerUpdateOrder(
+  function farmerUpdateOrderInformation(
+    uint256 orderId, 
+    string memory seedName,
+    uint256 sowingDate
+  ) public {
+    require(idToOrder[orderId].status == STATUS_PRODUCING, "Order is not producing");
+    require(idToOrder[orderId].farmer == msg.sender, "Order is not yours");
+    require(idToOrder[orderId].isFarmerAccepted == true, "You are not accpeted for this Order");
+    idToOrder[orderId].seedName = seedName;
+    idToOrder[orderId].sowingDate = sowingDate;
+  }
+
+  function farmerUpdateCropInformation(
     uint256 orderId, 
     string memory fertilizer, 
     string memory pesticides,
@@ -88,5 +102,22 @@ contract SupplyChainContract {
       pesticides: pesticides,
       watering: watering
     }));
+  }
+
+  function markAsHarvested(
+    uint256 orderId
+  ) public {
+    require(idToOrder[orderId].farmer == msg.sender, "Order is not yours");
+    require(idToOrder[orderId].status == STATUS_PRODUCING, "Order is not producing");
+    idToOrder[orderId].status = STATUS_HARVESTED;
+    idToOrder[orderId].harvestDate = block.timestamp;
+  }
+
+  function verifyOrder(
+    uint256 orderId
+  ) public {
+    require(idToOrder[orderId].status == STATUS_HARVESTED, "Order is not harvest yet");
+    require(idToOrder[orderId].owner == msg.sender, "You can not verify this Order");
+    idToOrder[orderId].status = STATUS_VERIFIED;
   }
 }
