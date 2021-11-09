@@ -1,0 +1,13 @@
+.cmsAdmin {
+  display: flex;
+  width: 100%;
+}
+
+.cmsLeft {
+  width: 260px;
+  height: 100vh;
+}
+
+.cmsRight {
+  flex: 1;
+}

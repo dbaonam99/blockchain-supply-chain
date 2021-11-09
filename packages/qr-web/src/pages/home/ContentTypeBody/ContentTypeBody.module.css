@@ -1,13 +1,10 @@
 .contentType {
-  height: 100%;
-  width: 100%;
-  min-height: calc(100vh - 70px);
-  padding: 22px 30px 30px 30px;
-  background-color: #f9f9fa;
+  padding: 40px;
 }
 
 .heading {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -15,54 +12,23 @@
   font-size: 26px;
   font-weight: 500;
   text-transform: capitalize;
-}
-
-.heading div {
-  padding: 10px 15px;
-  background-color: red;
-  color: #FFF;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 12px;
-  cursor: pointer;
-  user-select: none;
-  transition: .3s;
-}
-
-.heading div:active {
-  transform: scale(.9)
-}
-
-.fields {
-  padding: 20px 25px;
-  margin-top: 20px;
-  box-shadow: rgb(227, 233, 243) 0px 0px 4px;
-  background-color: #FFF;
-  border-radius: 5px;
-}
-
-.fieldsTitle {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin: 0;
 }
 
 .addBtn {
   display: flex;
   font-size: 14px;
   align-items: center;
-  color: #FFF;
+  color: #fff;
   background-color: #3063fc;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
+  font-weight: bold;
+  height: max-content;
 }
 
 .addBtn:active {
-  transform: scale(.9)
+  transform: scale(0.9);
 }

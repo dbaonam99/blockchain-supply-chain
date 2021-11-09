@@ -92,6 +92,15 @@
   transform: scale(0.9);
 }
 
+.status {
+  transition: all 0.3s;
+  text-align: center;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 @media only screen and (max-width: 580px) {
   .login__box__left {
     display: none;
