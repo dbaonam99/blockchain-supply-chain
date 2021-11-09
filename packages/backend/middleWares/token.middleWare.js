@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const { verifyJwtToken } = require('../utils/verifyJwtToken');
 
 module.exports.verifyToken = async function (req, res, next) {
@@ -19,4 +18,4 @@ module.exports.verifyToken = async function (req, res, next) {
       message: 'No token provided.',
     });
   }
-}
+};
