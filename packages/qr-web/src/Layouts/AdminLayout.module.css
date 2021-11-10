@@ -1,15 +1,30 @@
-.contentType {
-  padding: 40px;
+.cmsAdmin {
+  display: flex;
+  width: 100%;
+}
+
+.cmsLeft {
+  width: 260px;
+  height: 100vh;
+}
+
+.cmsRight {
+  flex: 1;
+}
+
+.cmsBody {
+  padding: 10px 20px;
 }
 
 .heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
 }
 
 .heading p {
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 500;
   text-transform: capitalize;
   margin: 0;
@@ -20,13 +35,15 @@
   font-size: 14px;
   align-items: center;
   color: #fff;
-  background-color: #3063fc;
+  background-color: #999;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s;
   font-weight: bold;
   height: max-content;
+  justify-content: center;
+  min-width: 60px;
 }
 
 .addBtn:active {

@@ -1,0 +1,26 @@
+.inputWrapper {
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+.label {
+  color: #000;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.input {
+  height: 34px;
+  width: calc(100% - 20px);
+  outline: none;
+  padding: 0 10px;
+  border-radius: 5px;
+  border: 1px #ddd solid;
+}
+
+.input:focus {
+  border: 1px #777 solid;
+}

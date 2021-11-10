@@ -1,34 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import Header from '../../components/Header/Header';
-import ContentTypeBody from './ContentTypeBody/ContentTypeBody';
-import UserService from '../../services/user.service';
+import React from 'react';
+import AdminLayout from '../../Layouts/AdminLayout';
 import styles from './Home.module.css';
 
-function Home({ history }) {
-  const [userData, setUserData] = useState();
-  useEffect(() => {
-    UserService.getUserInfo().then(
-      (res) => {
-        setUserData(res.data);
-      },
-      (error) => {
-        console.log(error);
-        history.push('/login');
-      }
-    );
-  }, [history]);
-
+function Home({ location, history }) {
+  if (location.pathname === '/') {
+    history.push('/orders');
+  }
   return (
-    <div className={styles.cmsAdmin}>
-      <div className={styles.cmsLeft}>
-        <Sidebar />
-      </div>
-      <div className={styles.cmsRight}>
-        {userData && <Header userData={userData} />}
-        <ContentTypeBody />
-      </div>
-    </div>
+    <AdminLayout buttonType="add" title="Orders">
+      <table className={styles.table}>
+        <tbody>
+          <tr>
+            <th>asd</th>
+            <th>asd</th>
+            <th>asd</th>
+            <th>asd</th>
+          </tr>
+          <tr>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+          </tr>
+          <tr>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+          </tr>
+          <tr>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+            <td>asd</td>
+          </tr>
+        </tbody>
+      </table>
+    </AdminLayout>
   );
 }
 

@@ -13,7 +13,8 @@ function Login({ history }) {
     TokenService.removeUser();
   }, []);
 
-  const onSubmit = async () => {
+  const onSubmit = async (event) => {
+    event.preventDefault();
     setLoading(true);
     const res = await AuthService.login(user, password);
     if (res.status === 200) {
@@ -33,7 +34,7 @@ function Login({ history }) {
       <div className="login__background" />
       <div className="login__box">
         <div className="login__box__left"></div>
-        <div className="login__box__right">
+        <form className="login__box__right">
           <h2>Sign in</h2>
           <div className="login__box__right__input">
             <label>Username</label>
@@ -60,7 +61,7 @@ function Login({ history }) {
           >
             {status?.message}
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
