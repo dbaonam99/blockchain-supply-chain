@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Sidebar from '../components/Sidebar/Sidebar';
 import Header from '../components/Header/Header';
 import UserService from '../services/user.service';
 import styles from './AdminLayout.module.css';
 import { withRouter } from 'react-router';
+import { useAuth } from '../auth/account';
 
 function AdminLayout({ history, children, buttonType, title }) {
-  const [userData, setUserData] = useState();
+  const { getUserInfo } = useAuth();
   useEffect(() => {
     UserService.getUserInfo().then(
       (res) => {
-        setUserData(res.data);
+        getUserInfo(res.data);
       },
       (error) => {
         console.log(error);
         history.push('/login');
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
   return (
@@ -25,7 +27,7 @@ function AdminLayout({ history, children, buttonType, title }) {
         <Sidebar />
       </div>
       <div className={styles.cmsRight}>
-        {userData && <Header userData={userData} />}
+        <Header />
         <div className={styles.cmsBody}>
           <div className={styles.heading}>
             <p>{title}</p>

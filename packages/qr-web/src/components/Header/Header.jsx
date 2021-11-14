@@ -1,14 +1,16 @@
 import React from 'react';
 import { IoAppsSharp } from 'react-icons/io5';
+import { useAuth } from '../../auth/account';
 import styles from './Header.module.css';
 
-function Header({ userData }) {
+function Header() {
+  const { userInfo } = useAuth();
   return (
     <div className={styles.header}>
       <div className={styles.changeSideBar}>
         <IoAppsSharp />
       </div>
-      <p>{userData?.role}</p>
+      <p>{userInfo?.role}</p>
     </div>
   );
 }

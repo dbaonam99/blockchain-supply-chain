@@ -12,6 +12,7 @@ module.exports.index = async function (req, res) {
     _id: userEntity._id,
     user: userEntity.user,
     role: userEntity.role,
+    privateKey: userEntity.privateKey,
     create_at: userEntity.create_at,
   });
 };
@@ -40,11 +41,13 @@ module.exports.login = async function (req, res) {
 
   await User.findByIdAndUpdate({ _id: userEntity._id }, { refreshToken });
 
-  res.status(200).json({ token, refreshToken });
+  res
+    .status(200)
+    .json({ token, refreshToken, privateKey: userEntity.privateKey });
 };
 
 module.exports.register = async function (req, res) {
-  const { user, password, role } = req.body;
+  const { user, password, role, privateKey } = req.body;
   const oldUser = await User.findOne({ user });
 
   if (oldUser) {
@@ -59,6 +62,7 @@ module.exports.register = async function (req, res) {
     password: hashedPassword,
     create_at: new Date(),
     role,
+    privateKey,
   };
 
   await User.create(data);

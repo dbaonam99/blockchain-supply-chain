@@ -1,0 +1,34 @@
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { contract } from '../queries/contracts';
+import { web3 } from '../queries/web3';
+
+const AuthContext = createContext({});
+export const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = (props) => {
+  const [userInfo, setUserInfo] = useState();
+  const [account, setAccount] = useState();
+
+  const getUserInfo = (data) => {
+    setUserInfo(data);
+  };
+
+  useEffect(() => {
+    if (!userInfo) return;
+    (async () => {
+      // const accounts = await web3.eth.getAccounts();
+
+      const account = await web3.eth.accounts.privateKeyToAccount(
+        userInfo.privateKey
+      );
+
+      setAccount(account);
+    })();
+  }, [userInfo]);
+
+  return (
+    <AuthContext.Provider value={{ userInfo, getUserInfo, account }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
+};

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../auth/account';
 import AuthService from '../../services/auth.service';
 import TokenService from '../../services/token.service';
 import './Login.css';
 
 function Login({ history }) {
+  const { getUserInfo } = useAuth();
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,13 +20,14 @@ function Login({ history }) {
     setLoading(true);
     const res = await AuthService.login(user, password);
     if (res.status === 200) {
-      setStatus({ type: 'success', message: 'Login success!' });
+      getUserInfo(res.data.privateKey);
+      toast.success('Login success!');
       setLoading(false);
       setTimeout(() => {
         history.push('/');
       }, 1000);
     } else {
-      setStatus({ type: 'error', message: res.data });
+      toast.error(res.data);
       setLoading(false);
     }
   };
@@ -55,12 +58,6 @@ function Login({ history }) {
           <button onClick={onSubmit}>
             {loading ? 'Loading...' : 'Sign in'}
           </button>
-          <div
-            className="status"
-            style={{ color: status.type === 'success' ? 'green' : 'red' }}
-          >
-            {status?.message}
-          </div>
         </form>
       </div>
     </div>

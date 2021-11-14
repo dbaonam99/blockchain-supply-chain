@@ -67,65 +67,7 @@ figure {
   margin: 0;
 }
 
-.react-datepicker__triangle {
-  display: none !important;
-}
-
-.sun-editor {
-  width: 100%;
-  font-weight: 400;
-  font-size: 14px;
-  cursor: text;
-  outline: 0;
-  border: 1px rgb(227, 233, 243) solid;
-  border-radius: 10px;
-  color: rgb(51, 55, 64);
-  background-color: red;
-  margin: 0;
-  overflow: hidden;
-}
-
-.sun-editor:focus {
-  border-color: #b3d4fc;
-  color: #000000;
-  text-shadow: none;
-}
-
-.se-toolbar {
-  outline: 0 !important;
-  background-color: #f0f1f1 !important;
-  padding: 5px !important;
-  font-size: 14px !important;
-}
-
-.sun-editor-editable {
-  padding: 10px !important;
-}
-
-.sun-editor-editable p {
-  margin: 0px !important;
-}
-
-.sun-editor .se-btn {
-  width: 24px !important;
-  height: 24px !important;
-}
-
-.sun-editor .se-btn svg {
-  width: 14px !important;
-  height: 14px !important;
-}
-
-.ReactModal__Overlay {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  background: rgba(0, 0, 0, 0.5) !important;
-}
-
-.ReactModal__Overlay--after-open {
-  opacity: 1;
-}
-
-.ReactModal__Overlay--before-close {
-  opacity: 0;
+.Toastify__toast {
+  font-weight: bold !important;
+  font-size: 12px !important;
 }
