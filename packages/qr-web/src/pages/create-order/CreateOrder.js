@@ -15,7 +15,7 @@ function CreateOrder() {
     createOrderMutation.mutate({
       productName,
       amount,
-      deliveryDate,
+      deliveryDate: deliveryDate / 1000,
     });
   };
 

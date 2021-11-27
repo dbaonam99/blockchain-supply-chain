@@ -1,6 +1,7 @@
 .sideBar {
   display: flex;
   width: 260px;
+  min-width: 260px;
   height: 100vh;
   background-image: url('../../assets/images/login-background.jpg');
   background-size: cover;
@@ -10,8 +11,6 @@
     0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   transition: width 0.5s;
-  /* border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px; */
   overflow: hidden;
 }
 

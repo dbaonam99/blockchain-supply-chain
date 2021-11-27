@@ -26,6 +26,9 @@ describe('SupplyChain', function () {
       await supplyChainContract.createOrder('Rau sạch', 1000, 1000, {
         from: owner.address,
       });
+      await supplyChainContract.createOrder('Rau sạch 2', 1000, 1000, {
+        from: owner.address,
+      });
     });
 
     it('Should farmer take an order', async function () {
@@ -57,23 +60,11 @@ describe('SupplyChain', function () {
     });
 
     it('Should get an Order detail', async function () {
-      // await supplyChainContract.getOrderDetail(1);
-      const detail = await supplyChainContract.getOrderDetail(1);
-      console.log({
-        orderId: detail.orderId,
-        productName: detail.productName,
-        owner: detail.owner,
-        farmer: detail.farmer,
-        isFarmerAccepted: detail.isFarmerAccepted,
-        amount: detail.amount,
-        orderDate: detail.orderDate,
-        deliveryDate: detail.deliveryDate,
-        status: detail.status,
-        seedName: detail.seedName,
-        sowingDate: detail.sowingDate,
-        harvestDate: detail.harvestDate,
-        cropInformation: detail.cropInformation,
-      });
+      await supplyChainContract.getOrderDetail(1);
+    });
+
+    it('Should get an all Orders', async function () {
+      console.log(await supplyChainContract.getOrders());
     });
   });
 });

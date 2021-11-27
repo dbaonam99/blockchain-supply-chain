@@ -17,6 +17,11 @@ module.exports.index = async function (req, res) {
   });
 };
 
+module.exports.getAll = async function (req, res) {
+  const users = await User.find();
+  return res.json(users);
+};
+
 module.exports.login = async function (req, res) {
   const { user, password } = req.body;
 

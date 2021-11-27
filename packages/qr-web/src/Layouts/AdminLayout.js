@@ -5,6 +5,7 @@ import UserService from '../services/user.service';
 import styles from './AdminLayout.module.css';
 import { withRouter } from 'react-router';
 import { useAuth } from '../auth/account';
+import './AdminLayout.module.css';
 
 function AdminLayout({ history, children, buttonType, title }) {
   const { getUserInfo } = useAuth();

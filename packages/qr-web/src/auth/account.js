@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { contract } from '../queries/contracts';
 import { web3 } from '../queries/web3';
 
 const AuthContext = createContext({});
@@ -15,13 +14,12 @@ export const AuthProvider = (props) => {
 
   useEffect(() => {
     if (!userInfo) return;
+    if (!userInfo.privateKey) return;
     (async () => {
-      // const accounts = await web3.eth.getAccounts();
-
       const account = await web3.eth.accounts.privateKeyToAccount(
-        userInfo.privateKey
+        userInfo?.privateKey
       );
-
+      console.log('address', account);
       setAccount(account);
     })();
   }, [userInfo]);

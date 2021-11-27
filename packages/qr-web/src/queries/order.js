@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { CONTRACT_ADDRESS, contract } from './contracts';
 import { toast } from 'react-toastify';
 import { send } from './utils.js';
@@ -32,4 +32,10 @@ export const useCreateOrderMutation = () => {
       },
     }
   );
+};
+
+export const useGetOrdersQuery = () => {
+  return useQuery('orders', async () => {
+    return await contract.methods.getOrders().call();
+  });
 };

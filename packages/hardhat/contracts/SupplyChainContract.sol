@@ -57,6 +57,20 @@ contract SupplyChainContract {
     order.status = STATUS_CREATED;
   }
 
+  function getOrders() public view returns (Order[] memory) {
+    uint orderCount = _orderIds.current();
+    uint currentIndex = 0;
+
+    Order[] memory orders = new Order[](orderCount);
+    for (uint i = 0; i < orderCount; i++) {
+      uint currentId = i + 1;
+      Order storage currentOrder = idToOrder[currentId];
+      orders[currentIndex] = currentOrder;
+      currentIndex += 1;
+    }
+    return orders;
+  }
+
   function getOrderDetail(uint256 orderId) public view returns (Order memory) {
     return idToOrder[orderId];
   }

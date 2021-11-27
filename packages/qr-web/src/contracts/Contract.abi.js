@@ -265,6 +265,108 @@ module.exports = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'getOrders',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'orderId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'productName',
+            type: 'string',
+          },
+          {
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'farmer',
+            type: 'address',
+          },
+          {
+            internalType: 'bool',
+            name: 'isFarmerAccepted',
+            type: 'bool',
+          },
+          {
+            internalType: 'uint256',
+            name: 'amount',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'orderDate',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'deliveryDate',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bytes32',
+            name: 'status',
+            type: 'bytes32',
+          },
+          {
+            internalType: 'string',
+            name: 'seedName',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'sowingDate',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'harvestDate',
+            type: 'uint256',
+          },
+          {
+            components: [
+              {
+                internalType: 'uint256',
+                name: 'cropCareDate',
+                type: 'uint256',
+              },
+              {
+                internalType: 'string',
+                name: 'fertilizer',
+                type: 'string',
+              },
+              {
+                internalType: 'string',
+                name: 'pesticides',
+                type: 'string',
+              },
+              {
+                internalType: 'string',
+                name: 'watering',
+                type: 'string',
+              },
+            ],
+            internalType: 'struct SupplyChainContract.CropInformation[]',
+            name: 'cropInformation',
+            type: 'tuple[]',
+          },
+        ],
+        internalType: 'struct SupplyChainContract.Order[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'uint256',
