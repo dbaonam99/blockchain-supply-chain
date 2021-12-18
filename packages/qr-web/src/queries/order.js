@@ -34,6 +34,32 @@ export const useCreateOrderMutation = () => {
   );
 };
 
+export const useGetAnOrderMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ role, orderId }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.farmerTakeOrder(role, orderId)
+      );
+      return 'Order created!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
 export const useGetOrdersQuery = () => {
   return useQuery('orders', async () => {
     return await contract.methods.getOrders().call();

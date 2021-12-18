@@ -32,7 +32,7 @@ describe('SupplyChain', function () {
     });
 
     it('Should farmer take an order', async function () {
-      await supplyChainContract.connect(addr1).farmerTakeOrder(1);
+      await supplyChainContract.connect(addr1).farmerTakeOrder('farmer', 1);
     });
 
     it('Should accept farmer to take an order', async function () {

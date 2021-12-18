@@ -8,7 +8,7 @@ import { useAuth } from '../auth/account';
 import './AdminLayout.module.css';
 
 function AdminLayout({ history, children, buttonType, title }) {
-  const { getUserInfo } = useAuth();
+  const { getUserInfo, userInfo } = useAuth();
   useEffect(() => {
     UserService.getUserInfo().then(
       (res) => {
@@ -32,6 +32,7 @@ function AdminLayout({ history, children, buttonType, title }) {
         <div className={styles.cmsBody}>
           <div className={styles.heading}>
             <p>{title}</p>
+            {/* {userInfo?.role === 'coopmart' && ( */}
             <div
               className={styles.addBtn}
               onClick={() => {
@@ -41,6 +42,7 @@ function AdminLayout({ history, children, buttonType, title }) {
             >
               {buttonType === 'add' ? 'Add new' : 'Back'}
             </div>
+            {/* )} */}
           </div>
           {children}
         </div>

@@ -4,10 +4,6 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract SupplyChainContract {
-  bytes32 public constant STATUS_CREATED = keccak256("STATUS_CREATED");
-  bytes32 public constant STATUS_PRODUCING = keccak256("STATUS_PRODUCING");
-  bytes32 public constant STATUS_HARVESTED = keccak256("STATUS_HARVESTED");
-  bytes32 public constant STATUS_VERIFIED = keccak256("STATUS_VERIFIED");
 
   using Counters for Counters.Counter;
   Counters.Counter private _orderIds;
@@ -30,7 +26,7 @@ contract SupplyChainContract {
     uint256 amount;
     uint256 orderDate;
     uint256 deliveryDate;
-    bytes32 status;
+    string status;
 
     string seedName;
     uint256 sowingDate;
@@ -51,10 +47,11 @@ contract SupplyChainContract {
     order.productName = productName;
     order.owner = msg.sender;
     order.farmer = address(0);
+    order.isFarmerAccepted = false;
     order.amount = amount;
     order.orderDate = block.timestamp;
     order.deliveryDate = deliveryDate;
-    order.status = STATUS_CREATED;
+    order.status = 'STATUS_CREATED';
   }
 
   function getOrders() public view returns (Order[] memory) {
@@ -75,8 +72,8 @@ contract SupplyChainContract {
     return idToOrder[orderId];
   }
 
-  function farmerTakeOrder(uint256 orderId) public {
-    require(idToOrder[orderId].status == STATUS_CREATED, "Order is producing");
+  function farmerTakeOrder(string memory role, uint256 orderId ) public {
+    require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_CREATED")), "Order is producing");
     idToOrder[orderId].farmer = msg.sender;
   }
 
@@ -84,7 +81,7 @@ contract SupplyChainContract {
     require(idToOrder[orderId].farmer != address(0), "Order do not have any farmer");
     require(idToOrder[orderId].owner == msg.sender, "You can not accept this Order");
     idToOrder[orderId].isFarmerAccepted = isAccept;
-    idToOrder[orderId].status = STATUS_PRODUCING;
+    idToOrder[orderId].status = "STATUS_PRODUCING";
   }
 
   function farmerUpdateOrderInformation(
@@ -92,7 +89,7 @@ contract SupplyChainContract {
     string memory seedName,
     uint256 sowingDate
   ) public {
-    require(idToOrder[orderId].status == STATUS_PRODUCING, "Order is not producing");
+    require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_PRODUCING")), "Order is not producing");
     require(idToOrder[orderId].farmer == msg.sender, "Order is not yours");
     require(idToOrder[orderId].isFarmerAccepted == true, "You are not accpeted for this Order");
     idToOrder[orderId].seedName = seedName;
@@ -105,7 +102,7 @@ contract SupplyChainContract {
     string memory pesticides,
     string memory watering
   ) public {
-    require(idToOrder[orderId].status == STATUS_PRODUCING, "Order is not producing");
+    require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_PRODUCING")), "Order is not producing");
     require(idToOrder[orderId].farmer == msg.sender, "Order is not yours");
     require(idToOrder[orderId].isFarmerAccepted == true, "You are not accpeted for this Order");
     Order storage order = idToOrder[orderId];
@@ -122,16 +119,16 @@ contract SupplyChainContract {
     uint256 orderId
   ) public {
     require(idToOrder[orderId].farmer == msg.sender, "Order is not yours");
-    require(idToOrder[orderId].status == STATUS_PRODUCING, "Order is not producing");
-    idToOrder[orderId].status = STATUS_HARVESTED;
+    require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_PRODUCING")), "Order is not producing");
+    idToOrder[orderId].status = "STATUS_HARVESTED";
     idToOrder[orderId].harvestDate = block.timestamp;
   }
 
   function verifyOrder(
     uint256 orderId
   ) public {
-    require(idToOrder[orderId].status == STATUS_HARVESTED, "Order is not harvest yet");
+    require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_HARVESTED")), "Order is not harvest yet");
     require(idToOrder[orderId].owner == msg.sender, "You can not verify this Order");
-    idToOrder[orderId].status = STATUS_VERIFIED;
+    idToOrder[orderId].status = "STATUS_VERIFIED";
   }
 }

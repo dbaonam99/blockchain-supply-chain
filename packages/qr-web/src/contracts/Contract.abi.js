@@ -1,57 +1,5 @@
 module.exports = [
   {
-    inputs: [],
-    name: 'STATUS_CREATED',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'STATUS_HARVESTED',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'STATUS_PRODUCING',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'STATUS_VERIFIED',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'uint256',
@@ -94,6 +42,11 @@ module.exports = [
   },
   {
     inputs: [
+      {
+        internalType: 'string',
+        name: 'role',
+        type: 'string',
+      },
       {
         internalType: 'uint256',
         name: 'orderId',
@@ -209,9 +162,9 @@ module.exports = [
             type: 'uint256',
           },
           {
-            internalType: 'bytes32',
+            internalType: 'string',
             name: 'status',
-            type: 'bytes32',
+            type: 'string',
           },
           {
             internalType: 'string',
@@ -311,9 +264,9 @@ module.exports = [
             type: 'uint256',
           },
           {
-            internalType: 'bytes32',
+            internalType: 'string',
             name: 'status',
-            type: 'bytes32',
+            type: 'string',
           },
           {
             internalType: 'string',
@@ -417,9 +370,9 @@ module.exports = [
         type: 'uint256',
       },
       {
-        internalType: 'bytes32',
+        internalType: 'string',
         name: 'status',
-        type: 'bytes32',
+        type: 'string',
       },
       {
         internalType: 'string',
