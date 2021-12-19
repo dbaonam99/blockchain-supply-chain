@@ -32,17 +32,18 @@ function AdminLayout({ history, children, buttonType, title }) {
         <div className={styles.cmsBody}>
           <div className={styles.heading}>
             <p>{title}</p>
-            {/* {userInfo?.role === 'coopmart' && ( */}
-            <div
-              className={styles.addBtn}
-              onClick={() => {
-                if (buttonType === 'add') history.push('/orders/create-order');
-                else history.goBack();
-              }}
-            >
-              {buttonType === 'add' ? 'Add new' : 'Back'}
-            </div>
-            {/* )} */}
+            {userInfo?.role === 'coopmart' && (
+              <div
+                className={styles.addBtn}
+                onClick={() => {
+                  if (buttonType === 'add')
+                    history.push('/orders/create-order');
+                  else history.goBack();
+                }}
+              >
+                {buttonType === 'add' ? 'Add new' : 'Back'}
+              </div>
+            )}
           </div>
           {children}
         </div>

@@ -44,7 +44,33 @@ export const useGetAnOrderMutation = () => {
         CONTRACT_ADDRESS,
         contract.methods.farmerTakeOrder(role, orderId)
       );
-      return 'Order created!';
+      return 'Get an order success!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const useAcceptFarmerMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId, isAccept }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.acceptFarmer(orderId, isAccept)
+      );
+      return 'Order accepted!';
     },
     {
       onError: (error) => {

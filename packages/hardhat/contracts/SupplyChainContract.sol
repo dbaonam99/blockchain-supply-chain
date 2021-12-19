@@ -75,6 +75,7 @@ contract SupplyChainContract {
 
   function farmerTakeOrder(string memory role, uint256 orderId ) public {
     require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_CREATED")), "Order is producing");
+    require(keccak256(abi.encode(role)) == keccak256(abi.encode("farmer")), "You are not a farmer");
     idToOrder[orderId].farmer = msg.sender;
   }
 

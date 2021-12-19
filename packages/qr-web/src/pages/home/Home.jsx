@@ -1,7 +1,11 @@
 import React from 'react';
 import { useAuth } from '../../auth/account';
 import AdminLayout from '../../Layouts/AdminLayout';
-import { useGetAnOrderMutation, useGetOrdersQuery } from '../../queries/order';
+import {
+  useAcceptFarmerMutation,
+  useGetAnOrderMutation,
+  useGetOrdersQuery,
+} from '../../queries/order';
 import { timeConverter } from '../../utils/time';
 import styles from './Home.module.css';
 
@@ -9,6 +13,7 @@ function Home({ location, history }) {
   const { data: orders } = useGetOrdersQuery();
   const { userInfo } = useAuth();
   const getAnOrder = useGetAnOrderMutation();
+  const acceptFarmer = useAcceptFarmerMutation();
 
   const getUserByAddress = (address) => {
     // console.log(address);
@@ -18,10 +23,14 @@ function Home({ location, history }) {
     return 'zxc';
   };
 
-  const handleOnGetAOrder = () => {
+  const handleOnAcceptFarmer = (orderId, isAccept) => {
+    acceptFarmer.mutate({ orderId, isAccept });
+  };
+
+  const handleOnGetAOrder = (orderId) => {
     getAnOrder.mutate({
       role: userInfo.role,
-      orderId: '0x1',
+      orderId,
     });
   };
 
@@ -30,7 +39,7 @@ function Home({ location, history }) {
   }
 
   return (
-    <AdminLayout buttonType="add" title="Orders" userInfo={userInfo}>
+    <AdminLayout buttonType="add" title="Orders">
       <table className={styles.table}>
         <tbody>
           <tr>
@@ -46,7 +55,7 @@ function Home({ location, history }) {
             console.log(item);
             return (
               <tr key={idx}>
-                <td>{idx + 1}</td>
+                <td>{item[0]}</td>
                 <td>{item[1]}</td>
                 <td>owner</td>
                 <td>farmer</td>
@@ -54,7 +63,11 @@ function Home({ location, history }) {
                   <p>Order Date: {timeConverter(item[6])}</p>
                   <p>Delivery Date: {timeConverter(item[7])}</p>
                   <p>Status: {item[9]}</p>
-                  <p>{item[4] ? 'Farmer Accepted' : 'Waiting Acceptance'}</p>
+                  <p>
+                    {parseInt(Number(item[3]), 16) === 0
+                      ? 'Waiting request'
+                      : 'Farmer request to get an order '}
+                  </p>
                 </td>
                 <td>
                   <p>{item[5]}</p>
@@ -64,7 +77,20 @@ function Home({ location, history }) {
                   <p>Crop info</p>
                 </td>
                 <td>
-                  <button onClick={handleOnGetAOrder}>Get this order</button>
+                  {userInfo?.role === 'farmer' &&
+                    parseInt(Number(item[3]), 16) === 0 && (
+                      <button onClick={() => handleOnGetAOrder(item[0])}>
+                        Get this order
+                      </button>
+                    )}
+                  {userInfo?.role === 'coopmart' &&
+                    parseInt(Number(item[3]), 16) !== 0 && (
+                      <button
+                        onClick={() => handleOnAcceptFarmer(item[0], true)}
+                      >
+                        Accept this order
+                      </button>
+                    )}
                 </td>
               </tr>
             );
