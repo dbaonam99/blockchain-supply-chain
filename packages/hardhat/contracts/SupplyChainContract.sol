@@ -44,6 +44,7 @@ contract SupplyChainContract {
     uint256 orderId = _orderIds.current();
 
     Order storage order = idToOrder[orderId];
+    order.orderId = orderId;
     order.productName = productName;
     order.owner = msg.sender;
     order.farmer = address(0);
