@@ -27,3 +27,32 @@
 .changeSideBar:active {
   transform: scale(0.9);
 }
+
+.button {
+  width: max-content;
+  justify-content: center;
+  padding: 10px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  color: #fff;
+  background-color: red;
+  padding: 5px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+  height: max-content;
+  outline: 0;
+  border: 0;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.text {
+  flex: 1;
+  text-align: right;
+  margin-right: 20px;
+}

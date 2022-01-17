@@ -86,6 +86,171 @@ export const useAcceptFarmerMutation = () => {
   );
 };
 
+export const useUpdateOrderMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId, seedName, sowingDate }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.farmerUpdateOrderInformation(
+          orderId,
+          seedName,
+          sowingDate
+        )
+      );
+      return 'Order updated!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const useUpdateCropMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId, fertilizer, pesticides, watering }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.farmerUpdateCropInformation(
+          orderId,
+          fertilizer,
+          pesticides,
+          watering
+        )
+      );
+      return 'Crop updated!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const useMaskAsHarvestMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.markAsHarvested(orderId)
+      );
+      return 'Crop harvested!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const useVerifyOrderMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.verifyOrder(orderId)
+      );
+      return 'Crop harvested!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const useDeleteAnOrderMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.deleteOrder(orderId)
+      );
+      return 'Order deleted!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
+export const usePublishAnOrderMutation = () => {
+  const { account } = useAuth();
+
+  return useMutation(
+    async ({ orderId, publicKey }) => {
+      await send(
+        account,
+        CONTRACT_ADDRESS,
+        contract.methods.publishOrder(orderId, publicKey)
+      );
+      return 'Order published!';
+    },
+    {
+      onError: (error) => {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        }
+      },
+
+      onSuccess: (data) => {
+        toast.success(data);
+      },
+    }
+  );
+};
+
 export const useGetOrdersQuery = () => {
   return useQuery('orders', async () => {
     return await contract.methods.getOrders().call();

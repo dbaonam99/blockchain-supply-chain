@@ -43,6 +43,19 @@ module.exports = [
   {
     inputs: [
       {
+        internalType: 'uint256',
+        name: 'orderId',
+        type: 'uint256',
+      },
+    ],
+    name: 'deleteOrder',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'string',
         name: 'role',
         type: 'string',
@@ -208,6 +221,11 @@ module.exports = [
             name: 'cropInformation',
             type: 'tuple[]',
           },
+          {
+            internalType: 'address',
+            name: 'publicKey',
+            type: 'address',
+          },
         ],
         internalType: 'struct SupplyChainContract.Order',
         name: '',
@@ -310,6 +328,11 @@ module.exports = [
             name: 'cropInformation',
             type: 'tuple[]',
           },
+          {
+            internalType: 'address',
+            name: 'publicKey',
+            type: 'address',
+          },
         ],
         internalType: 'struct SupplyChainContract.Order[]',
         name: '',
@@ -389,6 +412,11 @@ module.exports = [
         name: 'harvestDate',
         type: 'uint256',
       },
+      {
+        internalType: 'address',
+        name: 'publicKey',
+        type: 'address',
+      },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -402,6 +430,24 @@ module.exports = [
       },
     ],
     name: 'markAsHarvested',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'orderId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'publicKey',
+        type: 'address',
+      },
+    ],
+    name: 'publishOrder',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

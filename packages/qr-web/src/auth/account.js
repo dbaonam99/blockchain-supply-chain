@@ -16,11 +16,11 @@ export const AuthProvider = (props) => {
     if (!userInfo) return;
     if (!userInfo.privateKey) return;
     (async () => {
-      const account = await web3.eth.accounts.privateKeyToAccount(
+      const account = web3.eth.accounts.privateKeyToAccount(
         userInfo?.privateKey
       );
-      console.log('address', account);
-      setAccount(account);
+      console.log('address', { ...account, ...userInfo });
+      setAccount({ ...account, ...userInfo });
     })();
   }, [userInfo]);
 

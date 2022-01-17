@@ -4,6 +4,7 @@ var userSchema = new mongoose.Schema(
   {
     create_at: Date,
     privateKey: String,
+    address: String,
     name: String,
     user: String,
     role: String,

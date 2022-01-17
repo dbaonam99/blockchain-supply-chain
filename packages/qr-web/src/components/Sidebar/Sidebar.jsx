@@ -5,13 +5,13 @@ import styles from './Sidebar.module.css';
 const navItems = [
   {
     id: 1,
-    name: 'Orders management',
+    name: 'Orders',
     route: '/orders',
   },
   {
     id: 2,
-    name: 'Verify order',
-    route: '/check-order',
+    name: 'My orders',
+    route: '/my-orders',
   },
 ];
 

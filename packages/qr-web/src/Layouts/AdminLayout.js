@@ -7,7 +7,7 @@ import { withRouter } from 'react-router';
 import { useAuth } from '../auth/account';
 import './AdminLayout.module.css';
 
-function AdminLayout({ history, children, buttonType, title }) {
+function AdminLayout({ history, children, buttonType, title, back }) {
   const { getUserInfo, userInfo } = useAuth();
   useEffect(() => {
     UserService.getUserInfo().then(
@@ -42,6 +42,16 @@ function AdminLayout({ history, children, buttonType, title }) {
                 }}
               >
                 {buttonType === 'add' ? 'Add new' : 'Back'}
+              </div>
+            )}
+            {back && (
+              <div
+                className={styles.addBtn}
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                Back
               </div>
             )}
           </div>

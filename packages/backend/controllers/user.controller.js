@@ -12,6 +12,7 @@ module.exports.index = async function (req, res) {
     _id: userEntity._id,
     user: userEntity.user,
     role: userEntity.role,
+    address: userEntity.address,
     privateKey: userEntity.privateKey,
     create_at: userEntity.create_at,
   });
@@ -46,9 +47,12 @@ module.exports.login = async function (req, res) {
 
   await User.findByIdAndUpdate({ _id: userEntity._id }, { refreshToken });
 
-  res
-    .status(200)
-    .json({ token, refreshToken, privateKey: userEntity.privateKey });
+  res.status(200).json({
+    token,
+    refreshToken,
+    privateKey: userEntity.privateKey,
+    address: userEntity.address,
+  });
 };
 
 module.exports.register = async function (req, res) {
@@ -68,6 +72,7 @@ module.exports.register = async function (req, res) {
     create_at: new Date(),
     role,
     privateKey,
+    address,
   };
 
   await User.create(data);
@@ -101,4 +106,13 @@ module.exports.refresh = async function (req, res) {
       message: 'Invalid request',
     });
   }
+};
+
+module.exports.getByAddress = async function (req, res) {
+  const user = await User.findOne({ address: req.params.address });
+
+  if (!user) {
+    return res.status(201).send('User not found!');
+  }
+  return res.json(user);
 };

@@ -1,5 +1,5 @@
 .inputWrapper {
-  width: calc(100% - 20px);
+  width: 100%;
   padding: 10px;
 }
 
@@ -14,7 +14,7 @@
 
 .input {
   height: 34px;
-  width: calc(100% - 20px);
+  width: 100%;
   outline: none;
   padding: 0 10px;
   border-radius: 5px;

@@ -8,7 +8,18 @@
 .table th {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
+}
+
+.tableSmall {
+  background-color: #f2f2f2;
+}
+
+.tableSmall tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tableSmall tr:hover {
+  background-color: #f2f2f2 !important;
 }
 
 .table tr:nth-child(even) {
@@ -22,9 +33,9 @@
 .table th {
   padding-top: 12px;
   padding-bottom: 12px;
+  text-align: left;
   background-color: #3ca407;
   color: white;
-  text-align: center;
 }
 
 .table td p {
@@ -41,4 +52,17 @@
   color: #fff;
   font-weight: bold;
   font-size: 10px;
+  margin-bottom: 10px;
+}
+
+.status {
+  background-color: red;
+  font-size: 12px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

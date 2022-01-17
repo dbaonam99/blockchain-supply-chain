@@ -4,7 +4,7 @@ import Input from '../../components/Input/Input';
 import styles from './CreateOrder.module.css';
 import { useCreateOrderMutation } from '../../queries/order';
 
-function CreateOrder() {
+function CreateOrder({ history }) {
   const [productName, setProductName] = useState('');
   const [amount, setAmount] = useState('');
   const [deliveryDate, setDeliveryDate] = useState('');
@@ -12,11 +12,20 @@ function CreateOrder() {
   const createOrderMutation = useCreateOrderMutation();
 
   const handleOnSubmit = async () => {
-    createOrderMutation.mutate({
-      productName,
-      amount,
-      deliveryDate: deliveryDate / 1000,
-    });
+    createOrderMutation.mutate(
+      {
+        productName,
+        amount,
+        deliveryDate: Math.floor(new Date(deliveryDate) / 1000),
+      },
+      {
+        onSuccess: () => {
+          setTimeout(() => {
+            history.push('/');
+          }, 2000);
+        },
+      }
+    );
   };
 
   return (
@@ -38,7 +47,7 @@ function CreateOrder() {
           value={deliveryDate}
           onChange={(event) => {
             if (event.target.value) {
-              setDeliveryDate(Math.floor(new Date(event.target.value)));
+              setDeliveryDate(event.target.value);
             }
           }}
         />

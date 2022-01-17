@@ -1,0 +1,14 @@
+.cta {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.cta:last-child {
+  margin: 0;
+}

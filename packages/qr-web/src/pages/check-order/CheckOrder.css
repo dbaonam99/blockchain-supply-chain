@@ -1,0 +1,159 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login__background {
+  position: absolute;
+  background-image: url('../../assets/images/login-background.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.login__box {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 90%;
+  max-width: 700px;
+  height: 400px;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.login__box__left {
+  width: 50%;
+  height: 100%;
+  background-image: url('https://images.unsplash.com/photo-1553787434-45e1d245bfbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80');
+  background-size: cover;
+}
+
+.login__box__right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.login__box__right h2 {
+  width: 80%;
+  margin: 0 0 20px 0;
+}
+
+.login__box__right__input {
+  width: 80%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login__box__right__input label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+  padding: 0 2px;
+}
+
+.login__box__right__input input {
+  border: 0;
+  outline: 0;
+  height: 34px;
+  border-bottom: #ddd 1px solid;
+  padding: 0;
+}
+
+.login__box__right__input input:focus {
+  border-bottom: #3ca407 1px solid;
+}
+
+.login__box__right button {
+  width: 80%;
+  border: 0;
+  outline: 0;
+  height: 34px;
+  transition: all 0.3s;
+  background-color: #3ca407;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.login__box__right button:active {
+  transform: scale(0.9);
+}
+
+.status {
+  transition: all 0.3s;
+  text-align: center;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table td,
+.table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.tableSmall {
+  background-color: #f2f2f2;
+}
+
+.tableSmall tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.tableSmall tr:hover {
+  background-color: #f2f2f2 !important;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #3ca407;
+  color: white;
+}
+
+.table td p {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 580px) {
+  .login__box__left {
+    display: none;
+  }
+
+  .login__box__right {
+    width: 100%;
+    overflow-y: scroll;
+    margin: 50px 0;
+  }
+}

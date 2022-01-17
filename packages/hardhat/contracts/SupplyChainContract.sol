@@ -33,6 +33,7 @@ contract SupplyChainContract {
     uint256 harvestDate;
 
     CropInformation[] cropInformation;
+    address publicKey;
   }
 
   function createOrder(
@@ -132,5 +133,22 @@ contract SupplyChainContract {
     require(keccak256(abi.encode(idToOrder[orderId].status)) == keccak256(abi.encode("STATUS_HARVESTED")), "Order is not harvest yet");
     require(idToOrder[orderId].owner == msg.sender, "You can not verify this Order");
     idToOrder[orderId].status = "STATUS_VERIFIED";
+  }
+
+  function deleteOrder(
+    uint256 orderId
+  ) public {
+    require(idToOrder[orderId].owner == msg.sender, "You can not delete this Order");
+    idToOrder[orderId].status = "STATUS_DELETED";
+  }
+
+  function publishOrder(
+    uint256 orderId,
+    address publicKey
+  ) public {
+    require(keccak256(abi.encode(idToOrder[orderId].status)) != keccak256(abi.encode("STATUS_PUBLISHED")), "Order is published");
+    require(idToOrder[orderId].owner == msg.sender, "You can not publish this Order");
+    idToOrder[orderId].publicKey = publicKey;
+    idToOrder[orderId].status = "STATUS_PUBLISHED";
   }
 }

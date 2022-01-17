@@ -1,0 +1,36 @@
+.buttonRow {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addBtn {
+  width: max-content;
+  min-width: 60px;
+  justify-content: center;
+  padding: 10px;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  color: #fff;
+  background-color: #3063fc;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+  height: max-content;
+}
+
+.addBtn:active {
+  transform: scale(0.9);
+}
+
+.cropRow {
+  display: flex;
+  padding: 10px;
+}
+
+.cropRow div {
+  margin-right: 20px;
+}
